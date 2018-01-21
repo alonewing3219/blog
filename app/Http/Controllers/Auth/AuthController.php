@@ -7,11 +7,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Response;
 use App\User;
 
-
 class AuthController extends Controller
 {
 
-protected $redirectto = '/dashboard';
+protected $redirectTo = '/dashboard';
 
 protected $guard = 'admin';
 
@@ -24,14 +23,16 @@ protected $guard = 'admin';
 
     public function login(Request $request)
     {
-
 	$this->validate($request, [
-	    'username' => 'required',
-	    'pwd' => 'required',
+	    'email' => 'required',
+	    'password' => 'required',
 	]);
+	//return  'ccc';
+//	return $request->input('email').' => '.$request->input('password');
+	//return false;
 	if(Auth::attempt([
-	    'username' => $request->input('username'),
-	    'password' => $request->input('pwd')]))
+	    'email' => $request->input('email'),
+	    'password' => $request->input('password')]))
 
 	{
 	    return redirect()->intended($this->redirectTo);

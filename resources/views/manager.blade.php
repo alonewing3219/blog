@@ -33,18 +33,27 @@
 <body background=https://www.smartordersystem.com/images/banner_1_en_bg.png style="font-size:30px;">
 <form id="from" method="post" name="myform" action="manager" >
 {{ csrf_field() }}
-<label type="text"  style="background-color:#77DDFF;">開會日期</label>
-<input style="font-size:30px;" type="date" name="meeting_time" 
+<label type="text"  style="background-color:#77DDFF;">*開會日期</label>
+<input style="font-size:30px;" type="date" name="meeting_time" required="required" 
 	min="<?php echo date ("y-m-d",strtotime("-1months"));?>"
 	max="<?php echo date ("y-m-d",strtotime("+1months"));?>">
 <br>
 <br>
-<label type="text"  style="background-color:#77DDFF;">截止時間</label>
-<input style="font-size:30px;" type="date" name="deadline" 
+<label type="text"  style="background-color:#77DDFF;">*截止時間</label>
+<input style="font-size:30px;" type="date" name="deadline" required="required"
 	min="<?php echo date ("y-m-d",strtotime("-1months"));?>"
 	max="<?php echo date ("y-m-d",strtotime("+1months"));?>">
 <br>
 <br>
+<label>開會地點</label>
+<input type="text" name="place">
+<br>
+<br>
+<label>開會主題</label>
+<input type="text" name="topic">
+<br>
+<br>
+
 選擇餐廳
 <select style="font-size:30px;" name="store" id="store">
 <option value="">Default</option>

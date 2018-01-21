@@ -14,27 +14,6 @@
 }
 
 </style>
-<?php
-$date = '';
-$date2 = '';
-$text = '';
-$text2 = '';
-$person = '';
-$phone = '';
-if(isset($_GET['get_date']) && isset($_GET['get_date2']) && isset($_GET['store'])) {
-    $date = $_GET['get_date'];
-    $date2 = $_GET['get_date2'];
-    $text = $_GET['store'];
-    
-}
-if(isset($_GET['food']) && isset($_GET['person']) && isset($_GET['phone'])){
-
-    $text2 = $_GET['food'];
-$person = $_GET['person'];
-$phone = $_GET['phone'];
-}
-
-?>
 
 @extends('layouts.app')
 
@@ -53,80 +32,60 @@ $phone = $_GET['phone'];
                     @endif
 
 <body background=https://www.smartordersystem.com/images/banner_1_en_bg.png style="font-size:30px;">
-<form action="" method="get" name="myform">
-訂餐日期
-<input style="font-size:30px;" type="date" name="get_date" value="<?= $date?>"
-	min="<?php echo date ("y-m-d",strtotime("-1months"));?>"
-	max="<?php echo date ("y-m-d",strtotime("+1months"));?>">
+<form action="user" method="post" name="myform">
+{{ csrf_field() }}
+@foreach ($storelist as $list)
+訂餐期限
+{{ $list->deadline }}
 <br>
+開會時間
+{{ $list->meeting_time }}
 <br>
+開會地點
+{{ $list->place}}
+<br>
+開會主題
+{{ $list->topic}}
+<br>
+@endforeach
 選擇餐廳
-<select style="font-size:30px;" name="store" id="store">
-<option value="">Default</option>
-@if (count($storelist) > 0)
-
-    @foreach ($storelist as $list)
-       <option value="{{$list->name}}"> {{ $list->name }}</option>
+@foreach ($storelist as $list)
+    <label value="{{$list->store}}" name="store"> {{ $list->store }}</label>
+    <br>
+    @foreach ($foods as $food)
+        @if ($food->name == $list->store)
+	    <input type="radio" value="{{$food->thing}}" id="food" name="food" data-price="{{ $food->price}}">{{ $food->thing }}
+	    <label id='' value="{{$food->price}}" >{{ $food->price }}</label>
+<br>
+        @endif
     @endforeach
-
-@else 
-    nothing
-
-@endif
-</select>         
-<!--<input class="button" type="submit" value="選擇餐點囉">
-</form>
-<form action="" method="get">
---!>
-<select style="font-size:30px;" name="food" id="food">
-<option value="">Default</option>
-</select>
+@endforeach
+<br>
+<input  name="price" id="price" value="">
 
 <input class="button" type="submit" id="btn_smb"  value="選擇餐點囉">
 </form>
-<label type="text"  style="background-color:#77DDFF;">訂餐日期</label>
-<?= $date?>
-<br>
-<label type="text"  style="background-color:#77DDFF;">取餐日期</label>
-<?= $date2?>
-<br>
-<label type="text"  style="background-color:#77DDFF;">店家</label>
-<?= $text?>
-<br>
-<label type="text"  style="background-color:#77DDFF;">餐點</label>
-<?= $text2?>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
- //   alert('123');
     $.ajaxSetup({ headers:{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')} });
-    $(document).on('change', '#store', function(event){
-      event.preventDefault();
-      if($('select#store option:selected').val() == '')
-      {
-        $('#food').children().remove();
-        $('#food').append('<option value="">Default</option>');
-        return false;
-      }
-      $.ajax({
-          url: "/getFoodList",
+
+    $(document).on('click', 'input[name=food]:checked', function(event){
+//$('#price').remove();
+$('#price').val($(this).attr('data-price'));
+//      event.preventDefault();
+//alert($(this).attr('data-price'));
+//return false;
+/*      $.ajax({
+          url: "/getUserOrder",
           type: 'post',
           data: {
-            text1: $('select#store option:selected').val() 
-          },
-	  success: function( result ) {
-            //alert(result); 
-            $('#food').children().remove();
-            for(var key in result)
-            {
-              //alert(result[key]['thing']);
-              $('#food').append('<option value="' + result[key]['thing'] + '">' + result[key]['thing'] + '</option>');
-            } 
+            text1: $('input[name=food]:checked').attr('data-price') 
           }
-      });
+      });*/
     });
-
 
 });
 

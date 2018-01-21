@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Response;
 use App\Http\Requests;
 
-
 class ManagerController extends Controller
 {
     
@@ -43,7 +42,16 @@ DB::table('Select_Store')->insert([
 	'meeting_time' => $input['meeting_time'],
 'deadline' => $input['deadline'],
 'store' => $input['store'],
+'place' => $input['place'],
+'topic' => $input['topic'],
 ]);
+DB::table('record')->delete();
         return redirect('/manager');
+}
+
+public function getRecord(Request $request){
+$user = DB::table('record')->select('*');
+ return view('record',['users' => $user->get()]);
+
 }
 }

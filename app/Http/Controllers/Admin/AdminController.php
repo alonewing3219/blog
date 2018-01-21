@@ -11,8 +11,4 @@ class AdminController extends Controller
     {
         return view('home');
     }
-   public function dashboard_user()
-    {
-        return view('user');
-    }
 }

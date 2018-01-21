@@ -17,6 +17,9 @@ class CheckLoginController extends Controller
 	    'email' => 'required|email',
 	    'password' => 'required'
 	]);
+
+	print_r($request);
+	return false;
 	if(Auth::attempt([
 	    'email' => $request->input('email'),
             'password' => $request->input('password'),
