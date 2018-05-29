@@ -21,7 +21,7 @@ return view('test');
 
 public function getManager(Request $request){
 
-$store = DB::table('store')->select('id','name','address','phone');
+$store = DB::table('store')->select('*');
 $foods = DB::table('food')->select('id','name','thing','price');
 if ($store->count()>0)
 {
@@ -51,7 +51,8 @@ DB::table('record')->delete();
 
 public function getRecord(Request $request){
 $user = DB::table('record')->select('*');
- return view('record',['users' => $user->get()]);
+$Select_Store = DB::table('Select_Store')->select('*')->orderby('id', 'desc')->limit('1');
+ return view('record',['users' => $user->get(),'select_stores' => $Select_Store->get()]);
 
 }
 }

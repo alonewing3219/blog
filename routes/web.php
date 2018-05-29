@@ -18,12 +18,14 @@
 Route::get('/', 'Auth\AuthController@showLoginForm');
 Route::get('/login','Auth\AuthController@showLoginForm');
 Route::post('/login', 'Auth\AuthController@login');
-		Route::get('/register', 'Auth\RegisterController@showRegistrationForm');
-		Route::post('/register', 'Auth\RegisterController@register');
+Route::get('/register', 'Auth\RegisterController@showRegistrationForm');
+Route::post('/register', 'Auth\RegisterController@register');
 
-//Auth::routes();
+Route::get('/google', 'Auth\AuthController@redirectToGoogle');
+
+Route::get('/google/callback', 'Auth\AuthController@GoogleCallback');
 Route::group([ 'middleware' => ['admin.check']], function(){
-		Route::get('/logout', 'Auth\AuthController@logout');
+		Route::post('/logout', 'Auth\AuthController@logout');
 		Route::get('/dashboard', 'Admin\AdminController@dashboard');
 		Route::get('/home', 'HomeController@index')->name('home');
 		Route::get('/user', 'UserController@getStoreList');
@@ -31,6 +33,8 @@ Route::group([ 'middleware' => ['admin.check']], function(){
 		Route::post('/manager', 'ManagerController@getStore');
 		Route::post('/user', 'UserController@getUserOrder');
 		Route::get('/record', 'ManagerController@getRecord');
+	 	Route::get('/orderlist', 'OrderController@getOrderList');
+Route::post('/orderlist', 'OrderController@getOrder');
 });
 
 //Auth::routes();

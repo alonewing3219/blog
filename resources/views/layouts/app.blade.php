@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -61,6 +62,9 @@
                                         <a href="{{ url('user') }}" >
                                             使用者
                                         </a>
+                                        	<a href="{{ url('orderlist') }}" >
+           				    	新增店家
+                                        	</a>
 					@if (Auth::user()->manager)
                                         	<a href="{{ url('manager') }}" >
            				    	管理者

@@ -34,5 +34,10 @@ return [
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+'google' => [
+        'client_id' => '141819269642-cag7h3q9bc75jev7eojl5d84p7erin6g.apps.googleusercontent.com',
+        'client_secret' => 'Yw1RGQKXND7mGc6zV7ZM62j_',
+        'redirect' => 'https://alonewing.ddns.net/google/callback',
+    ],
 
 ];

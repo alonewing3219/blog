@@ -33,16 +33,16 @@
 <body background=https://www.smartordersystem.com/images/banner_1_en_bg.png style="font-size:30px;">
 <form id="from" method="post" name="myform" action="manager" >
 {{ csrf_field() }}
+    @foreach ($select_stores as $select_store)
 <label type="text"  style="background-color:#77DDFF;">開會日期</label>
-<input style="font-size:30px;" type="date" name="meeting_time" 
-	min="<?php echo date ("y-m-d",strtotime("-1months"));?>"
-	max="<?php echo date ("y-m-d",strtotime("+1months"));?>">
-<br>
-<br>
+{{$select_store->meeting_time}}
 <label type="text"  style="background-color:#77DDFF;">截止時間</label>
-<input style="font-size:30px;" type="date" name="deadline" 
-	min="<?php echo date ("y-m-d",strtotime("-1months"));?>"
-	max="<?php echo date ("y-m-d",strtotime("+1months"));?>">
+{{$select_store->deadline}}
+<label type="text"  style="background-color:#77DDFF;">開會主題</label>
+{{$select_store->place}}
+<label type="text"  style="background-color:#77DDFF;">開會地點</label>
+{{$select_store->topic}}
+    @endforeach
 <br>
 <br>
 選擇餐廳

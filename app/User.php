@@ -17,7 +17,7 @@ const STATUS_ACTIVE = '1';
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','manager','phone',
+        'name', 'email', 'password','manager','phone','google_id', 
     ];
 
     /**

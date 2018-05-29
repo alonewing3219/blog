@@ -1,0 +1,4 @@
+[2018-03-09 15:22:37] local.ERROR: main(): Failed opening required 'vendor/autoload.php' (include_path='.:/usr/share/php') {"exception":"[object] (Symfony\\Component\\Debug\\Exception\\FatalErrorException(code: 64): main(): Failed opening required 'vendor/autoload.php' (include_path='.:/usr/share/php') at /home/alonewing3219/blog/app/Http/Controllers/Auth/AuthController.php:12)
+[stacktrace]
+#0 {main}
+"} 
